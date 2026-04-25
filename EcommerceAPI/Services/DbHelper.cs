@@ -1,6 +1,16 @@
-﻿namespace EcommerceAPI.Services
+﻿using Microsoft.Data.SqlClient;
+
+public class DbHelper
 {
-    public class DbHelper
+    private readonly string _connectionString;
+
+    public DbHelper(IConfiguration config)
     {
+        _connectionString = config.GetConnectionString("DefaultConnection");
+    }
+
+    public SqlConnection GetConnection()
+    {
+        return new SqlConnection(_connectionString);
     }
 }
